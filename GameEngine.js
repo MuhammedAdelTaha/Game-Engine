@@ -92,7 +92,7 @@ class gameEngine{
         }
       }
       game.drawer(this.board);
-      await new Promise(resolve => setTimeout(resolve, 500));
+      await new Promise(resolve => setTimeout(resolve, 1000));
       let play = true;
       while(play){
         let result=null;
@@ -171,7 +171,7 @@ class gameEngine{
               this.playerTurn=!this.playerTurn;
             }
         }
-        await new Promise(resolve => setTimeout(resolve, 500));
+        await new Promise(resolve => setTimeout(resolve, 1000));
       }
     }
   }
