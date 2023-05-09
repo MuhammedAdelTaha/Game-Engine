@@ -1,0 +1,95 @@
+body {
+    background-color: #0051a2;
+    mix-blend-mode: screen;
+    font-family: 'Finger Paint', cursive;
+}
+
+h1 {
+    text-align: center;
+    color: #0051ff;
+    font-size: 48px;
+    margin-top: 70px;
+}
+
+.game-container {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    margin-top: 80px;
+}
+
+.game {
+    /* background-color: #0051ff; */
+    border-radius: 10px;
+    margin: 20px;
+    padding: 20px;
+    width: 300px;
+    /* box-shadow: 0 4px 8px #0051ff, 0 6px 20px rg#0051ff */
+}
+
+.game h2 {
+    color: #0051ff;
+    font-size: 20px;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.game img {
+    display: block;
+    margin: 0 auto;
+    width: 130px;
+    height: 130px;
+    object-fit: cover;
+    /* border: 5px solid #ffffff; */
+}
+
+.game p {
+    color: #0051ff;
+    font-size: 16px;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.tic-tac-toe {
+    background-color: #212020;
+}
+
+.connect-4 {
+    background-color: #212020;
+}
+
+.checkers {
+    background-color: #212020;
+}
+
+.chess {
+    background-color: #212020;
+}
+
+.sudoku {
+    background-color: #212020;
+}
+
+.eight-queens {
+    background-color: #212020;
+}
+
+.game {
+    width: calc(100% / 8 - 20px);
+    margin-right: 20px;
+}
+  
+@media (max-width: 768px) {
+    .game {
+      width: calc(100% / 3 - 20px);
+    }
+}
+  
+@media (max-width: 480px) {
+    .game {
+      width: 100%;
+      margin-right: 0;
+      margin-bottom: 20px;
+    }
+}
+  
