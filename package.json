@@ -1,0 +1,26 @@
+{
+  "name": "game_engine",
+  "version": "1.0.0",
+  "main": "GameEngine.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.4.0",
+    "lodash": "^4.17.21",
+    "moment": "^2.29.4",
+    "prompt-sync": "^4.2.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mostafa336/paradigm_js_games.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/mostafa336/paradigm_js_games/issues"
+  },
+  "homepage": "https://github.com/mostafa336/paradigm_js_games#readme",
+  "description": ""
+}
