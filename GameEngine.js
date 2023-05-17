@@ -12,7 +12,7 @@ class GameEngine {
   async gameLoop(board) {
     let playerTurn = true;
     this.drawer(board);
-    await new Promise((resolve) => setTimeout(resolve, 300));
+    await new Promise((resolve) => setTimeout(resolve, 1000));
 
     while (true) {
       let input = prompt("Enter the input of the game (E for Exit)");
@@ -26,7 +26,7 @@ class GameEngine {
       } else {
         alert("Error....");
       }
-      await new Promise((resolve) => setTimeout(resolve, 300));
+      await new Promise((resolve) => setTimeout(resolve, 1000));
     }
   }
 }
