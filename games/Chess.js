@@ -58,6 +58,7 @@ class Chess extends GameEngine {
         </style>
       `);
 
+    document.write("<title>Chess</title>");
     document.write('<div class="board-container">');
     document.write('<div class="board">');
     for (let i = 0; i < 8; i++) {

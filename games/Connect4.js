@@ -44,6 +44,7 @@ class Connect4 extends GameEngine {
         </style>
       `);
 
+    document.write("<title>Connect 4</title>");
     document.write('<div class="board-container">');
     document.write('<div class="board">');
     for (let i = 0; i <= 5; i++) {

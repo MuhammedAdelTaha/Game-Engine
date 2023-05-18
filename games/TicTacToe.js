@@ -55,6 +55,7 @@ class TicTacToe extends GameEngine {
         </style>
       `);
 
+    document.write("<title>Tic Tac Toe</title>");
     document.write('<div class="board-container">');
     document.write('<div class="board">');
     for (let i = 0; i < 3; i++) {
