@@ -14,7 +14,7 @@ class Chess extends GameEngine {
             align-items: center;
             height: 120vh;
             background-image: url('assets/backgrounds/chess.jpg');
-            background-repeat: 2;
+            background-repeat: 1;
             background-size: contain;
           }
           .board {

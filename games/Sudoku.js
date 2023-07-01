@@ -15,7 +15,7 @@ class Sudoku extends GameEngine {
             align-items: center;
             height: 120vh;
             background-image: url('assets/backgrounds/checkers.jpg');
-            background-repeat: 2;
+            background-repeat: 1;
             background-size: contain;
           }
           

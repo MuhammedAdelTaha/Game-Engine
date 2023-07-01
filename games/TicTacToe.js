@@ -15,8 +15,8 @@ class TicTacToe extends GameEngine {
             justify-content: center;
             align-items: center;
             height: 100%;
-            background-image: url('assets/backgrounds/xo.png');
-            background-repeat: 2;
+            background-image: url('assets/backgrounds/xo.jpg');
+            background-repeat: 1;
             background-size: contain;
           }
   
