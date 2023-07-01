@@ -16,7 +16,7 @@ class Connect4 extends GameEngine {
             background-image: url('assets/backgrounds/checkers.jpg');
             background-repeat: 1;
             background-size: contain;
-            height: 120vh;
+            height: 100%;
           }
     
           .board {

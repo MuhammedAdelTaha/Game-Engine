@@ -12,7 +12,7 @@ class Checkers extends GameEngine {
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 120vh;
+            height: 100%;
             background-image: url('assets/backgrounds/checkers.jpg');
             background-repeat: 1;
             background-size: contain;
