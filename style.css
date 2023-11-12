@@ -1,12 +1,11 @@
 body {
-  background-color: #0051a2;
-  mix-blend-mode: screen;
+  background-color: #003B73;
   font-family: "Finger Paint", cursive;
 }
 
 h1 {
   text-align: center;
-  color: #0051ff;
+  color: #0074B7;
   font-size: 48px;
   margin-top: 70px;
 }
@@ -19,17 +18,25 @@ h1 {
 }
 
 .game {
-  /* background-color: #0051ff; */
+  background-color: #0074B7;
+  mix-blend-mode: lighten;
   border-radius: 10px;
   margin: 20px;
   padding: 20px;
   width: 300px;
-  /* box-shadow: 0 4px 8px #0051ff, 0 6px 20px rg#0051ff */
+  user-select: none;
+  cursor: pointer;
+}
+
+.game:hover {
+  background-color: #0074b790;
+  transition: 0.7s;
 }
 
 .game h2 {
-  color: #0051ff;
+  color: #60A3D9;
   font-size: 16px;
+  
   text-align: center;
   margin-bottom: 30px;
 }
@@ -40,7 +47,7 @@ h1 {
   width: 100px;
   height: 100px;
   object-fit: cover;
-  /* border: 5px solid #ffffff; */
+  color: #0074B7;
 }
 
 .resizable-image {
@@ -49,34 +56,10 @@ h1 {
 }
 
 .game p {
-  color: #0051ff;
+  color: #BFD7ED;
   font-size: 14px;
   text-align: center;
   margin-top: 20px;
-}
-
-.tic-tac-toe {
-  background-color: #212020;
-}
-
-.connect-4 {
-  background-color: #212020;
-}
-
-.checkers {
-  background-color: #212020;
-}
-
-.chess {
-  background-color: #212020;
-}
-
-.sudoku {
-  background-color: #212020;
-}
-
-.eight-queens {
-  background-color: #212020;
 }
 
 .game {

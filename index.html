@@ -24,9 +24,11 @@
     <script src="games/Chess.js"></script>
     <script src="games/Sudoku.js"></script>
     <script src="games/EightQueens.js"></script>
+
     <h1>Game Engine</h1>
     <div class="game-container">
-      <div class="game tic-tac-toe">
+
+      <div class="game tic-tac-toe" onclick="play(1)">
         <h2>Tic-Tac-Toe</h2>
         <span class="d-none d-lg-block"
           ><img
@@ -39,7 +41,8 @@
           column or diagonal.
         </p>
       </div>
-      <div class="game connect-4">
+
+      <div class="game connect-4" onclick="play(2)">
         <h2>Connect 4</h2>
         <span class="d-none d-lg-block"
           ><img
@@ -52,7 +55,8 @@
           column or diagonal.
         </p>
       </div>
-      <div class="game checkers">
+
+      <div class="game checkers" onclick="play(3)">
         <h2>Checkers</h2>
         <span class="d-none d-lg-block"
           ><img
@@ -65,7 +69,8 @@
           pieces.
         </p>
       </div>
-      <div class="game chess">
+
+      <div class="game chess" onclick="play(4)">
         <h2>Chess</h2>
         <span class="d-none d-lg-block"
           ><img
@@ -78,7 +83,8 @@
           opponent's king.
         </p>
       </div>
-      <div class="game sudoku">
+
+      <div class="game sudoku" onclick="play(5)">
         <h2>Sudoku</h2>
         <span class="d-none d-lg-block"
           ><img
@@ -91,7 +97,8 @@
           1-9 without repeating in any row, column, or 3x3 box.
         </p>
       </div>
-      <div class="game eight-queens">
+
+      <div class="game eight-queens" onclick="play(6)">
         <h2>Eight Queens</h2>
         <span class="d-none d-lg-block"
           ><img

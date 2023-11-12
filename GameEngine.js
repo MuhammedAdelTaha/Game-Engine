@@ -34,22 +34,7 @@ class GameEngine {
 /**
  * Games Factor
  */
-async function play() {
-  await new Promise((resolve) => setTimeout(resolve, 1500));
-  let check;
-  while (true) {
-    check = prompt(
-      "1- TicTacToe \n2- Connect4 \n3- Checkers \n4- Chess \n5- Sudoku \n6- EightQueens\n7- Exit\n" +
-        "===============*** notes ***===============\n" +
-        "** For Tic-Tac-Toe, 8-Queens enter the cell number (like 00)\n" +
-        "** For Connect-4 enter the column number (like 0)\n" +
-        "** For Checkers, Chess enter the from cell number, comma and to cell number (like 00,11)\n" +
-        "** For Sudoku enter the cell number, comma and the number to put in the cell (like 00,0)"
-    );
-    check = parseInt(check);
-    if (!isNaN(check) && check >= 1 && check <= 7) break;
-  }
-  if (check == 7) return;
+function play(check) {
 
   let game, board;
   switch (check) {
@@ -134,4 +119,3 @@ async function play() {
     game.gameLoop(board);
   }
 }
-play();
