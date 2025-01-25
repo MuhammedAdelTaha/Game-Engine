@@ -14,8 +14,7 @@ class Sudoku extends GameEngine {
             justify-content: center;
             align-items: center;
             height: 100%;
-            background-image: url('assets/backgrounds/checkers.jpg');
-            background-repeat: 1;
+            background-image: url('/assets/backgrounds/checkers.jpg');
             background-size: contain;
           }
           
@@ -115,7 +114,7 @@ class Sudoku extends GameEngine {
 
   //input: rc,n
   controller(board, input, playerTurn) {
-    if ([...input].length != 4) {
+    if ([...input].length !== 4) {
       return { BD: board, f: false };
     }
     let row = parseInt(input[0]);

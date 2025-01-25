@@ -13,8 +13,7 @@ class Chess extends GameEngine {
             justify-content: center;
             align-items: center;
             height: 100%;
-            background-image: url('assets/backgrounds/chess.jpg');
-            background-repeat: 1;
+            background-image: url('/assets/backgrounds/chess.jpg');
             background-size: contain;
           }
           .board {
@@ -22,13 +21,11 @@ class Chess extends GameEngine {
             margin-left: 10px;
             grid-template-columns: repeat(8, 70px);
             grid-template-rows: repeat(8, 70px);
-            background-color: #d1a05f;
             width: calc(70px * 8);
             height: calc(70px * 8);
             border: 2px solid #000;
             border-collapse: collapse;
             box-shadow: 0 0 30px #626b74; /* Add a subtle box shadow */
-            background-color: #fff; /* Add a white background color */
           }
           #pos{
             position: relative;
@@ -41,7 +38,7 @@ class Chess extends GameEngine {
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 0em;
+            font-size: 0;
             font-weight: bold;
             border: 1px solid #000;
             background-color: white;
@@ -119,7 +116,7 @@ class Chess extends GameEngine {
 
   //input: rc,rc
   controller(board, input, playerTurn) {
-    if ([...input].length != 5) {
+    if ([...input].length !== 5) {
       return { BD: board, f: false };
     }
     let fromRow = parseInt(input[0]);
@@ -159,9 +156,9 @@ class Chess extends GameEngine {
       if (board[fromRow][fromCol] === "q" || board[fromRow][fromCol] === "Q") {
         // Check if the move is diagonal, horizontal, or vertical
         if (
-          Math.abs(toRow - fromRow) == Math.abs(toCol - fromCol) ||
-          toRow == fromRow ||
-          toCol == fromCol
+          Math.abs(toRow - fromRow) === Math.abs(toCol - fromCol) ||
+          toRow === fromRow ||
+          toCol === fromCol
         ) {
           const rowDistance = toRow - fromRow;
           const colDistance = toCol - fromCol;
@@ -208,13 +205,13 @@ class Chess extends GameEngine {
 
           // Check if there is a piece at the destination, and if it is of the opposite color
           if (
-            (board[fromRow][fromCol] == "q" &&
+            (board[fromRow][fromCol] === "q" &&
               "A" <= board[toRow][toCol] &&
               board[toRow][toCol] <= "Z") ||
-            (board[fromRow][fromCol] == "Q" &&
+            (board[fromRow][fromCol] === "Q" &&
               "a" <= board[toRow][toCol] &&
               board[toRow][toCol] <= "z") ||
-            board[toRow][toCol] == " "
+            board[toRow][toCol] === " "
           ) {
             board[toRow][toCol] = board[fromRow][fromCol];
             board[fromRow][fromCol] = " ";
@@ -232,7 +229,7 @@ class Chess extends GameEngine {
       //bishop  b or B    الفيل
       if (board[fromRow][fromCol] === "b" || board[fromRow][fromCol] === "B") {
         // Check if the move is diagonal
-        if (Math.abs(toRow - fromRow) == Math.abs(toCol - fromCol)) {
+        if (Math.abs(toRow - fromRow) === Math.abs(toCol - fromCol)) {
           const rowDistance = toRow - fromRow;
           const colDistance = toCol - fromCol;
 
@@ -242,15 +239,15 @@ class Chess extends GameEngine {
           const rowStep = rowDistance < 0 ? -1 : 1;
           const colStep = colDistance < 0 ? -1 : 1;
 
-          while (i != toRow && j != toCol) {
+          while (i !== toRow && j !== toCol) {
             i += rowStep;
             j += colStep;
 
             if (
-              (board[fromRow][fromCol] == "b" &&
+              (board[fromRow][fromCol] === "b" &&
                 "a" <= board[toRow][toCol] &&
                 board[toRow][toCol] <= "z") ||
-              (board[fromRow][fromCol] == "B" &&
+              (board[fromRow][fromCol] === "B" &&
                 "A" <= board[toRow][toCol] &&
                 board[toRow][toCol] <= "Z")
             ) {
@@ -258,10 +255,10 @@ class Chess extends GameEngine {
               return { BD: board, f: false };
             }
             if (
-              (board[fromRow][fromCol] == "b" &&
+              (board[fromRow][fromCol] === "b" &&
                 "A" <= board[toRow][toCol] &&
                 board[toRow][toCol] <= "Z") ||
-              (board[fromRow][fromCol] == "B" &&
+              (board[fromRow][fromCol] === "B" &&
                 "a" <= board[toRow][toCol] &&
                 board[toRow][toCol] <= "z")
             ) {
@@ -273,11 +270,11 @@ class Chess extends GameEngine {
 
           // Check if there is a piece at the destination, and if it is of the opposite color
           if (
-            board[toRow][toCol] == " " ||
-            (board[fromRow][fromCol] == "b" &&
+            board[toRow][toCol] === " " ||
+            (board[fromRow][fromCol] === "b" &&
               "A" <= board[toRow][toCol] &&
               board[toRow][toCol] <= "Z") ||
-            (board[fromRow][fromCol] == "B" &&
+            (board[fromRow][fromCol] === "B" &&
               "a" <= board[toRow][toCol] &&
               board[toRow][toCol] <= "z")
           ) {
@@ -295,7 +292,7 @@ class Chess extends GameEngine {
       }
 
       //King    k or K    الملك
-      if (board[fromRow][fromCol] == "K" || board[fromRow][fromCol] == "k") {
+      if (board[fromRow][fromCol] === "K" || board[fromRow][fromCol] === "k") {
         // Determine the row and column distance
         const rowDistance = Math.abs(toRow - fromRow);
         const colDistance = Math.abs(toCol - fromCol);
@@ -306,19 +303,19 @@ class Chess extends GameEngine {
         if (rowDistance <= 1 && colDistance <= 1) {
           // Check if there is a piece at the destination, and if it is of the opposite color
           if (
-            (board[fromRow][fromCol] == "k" &&
+            (board[fromRow][fromCol] === "k" &&
               "A" <= board[toRow][toCol] &&
               board[toRow][toCol] <= "Z") ||
-            (board[fromRow][fromCol] == "K" &&
+            (board[fromRow][fromCol] === "K" &&
               "a" <= board[toRow][toCol] &&
               board[toRow][toCol] <= "z") ||
-            board[toRow][toCol] == " "
+            board[toRow][toCol] === " "
           ) {
             board[toRow][toCol] = board[fromRow][fromCol];
             board[fromRow][fromCol] = " ";
             return { BD: board, f: true };
           } else {
-            //alert('Invalid movement wergwegwegwe');
+            //alert('Invalid movement');
             return { BD: board, f: false };
           }
         } else {
@@ -327,7 +324,7 @@ class Chess extends GameEngine {
         }
       }
 
-      //knight  N or n    حصان
+      //knight N or n حصان
       if (board[fromRow][fromCol] === "n" || board[fromRow][fromCol] === "N") {
         // Determine the row and column distance
         const rowDistance = Math.abs(toRow - fromRow);
@@ -336,24 +333,24 @@ class Chess extends GameEngine {
         console.log(`row : `, rowDistance, ` ,col `, colDistance);
         // Check if the move is valid for a knight
         if (
-          (rowDistance == 1 && colDistance == 2) ||
-          (rowDistance == 2 && colDistance === 1)
+          (rowDistance === 1 && colDistance === 2) ||
+          (rowDistance === 2 && colDistance === 1)
         ) {
           // Check if there is a piece at the destination, and if it is of the opposite color
           if (
-            (board[fromRow][fromCol] == "n" &&
+            (board[fromRow][fromCol] === "n" &&
               "A" <= board[toRow][toCol] &&
               board[toRow][toCol] <= "Z") ||
-            (board[fromRow][fromCol] == "N" &&
+            (board[fromRow][fromCol] === "N" &&
               "a" <= board[toRow][toCol] &&
               board[toRow][toCol] <= "z") ||
-            board[toRow][toCol] == " "
+            board[toRow][toCol] === " "
           ) {
             board[toRow][toCol] = board[fromRow][fromCol];
             board[fromRow][fromCol] = " ";
             return { BD: board, f: true };
           } else {
-            //alert('Invalid movement nljknlknj');
+            //alert('Invalid movement');
             return { BD: board, f: false };
           }
         } else {
@@ -363,16 +360,16 @@ class Chess extends GameEngine {
       }
 
       //rook   R or r
-      if (board[fromRow][fromCol] == "r" || board[fromRow][fromCol] == "R") {
-        var end,
-          cnst,
-          tmp,
-          i,
-          j,
-          tmp1 = "R";
-        var cap = true;
+      if (board[fromRow][fromCol] === "r" || board[fromRow][fromCol] === "R") {
+        let end,
+            constant,
+            tmp,
+            i,
+            j,
+            tmp1 = "R";
+        let cap = true;
 
-        if (board[fromRow][fromCol] == "r") {
+        if (board[fromRow][fromCol] === "r") {
           cap = false;
           tmp1 = "r";
         }
@@ -380,17 +377,17 @@ class Chess extends GameEngine {
         i = fromRow;
         j = fromCol;
 
-        if (fromCol == toCol && fromRow != toRow) {
+        if (fromCol === toCol && fromRow !== toRow) {
           end = toRow;
-          cnst = 0;
+          constant = 0;
           if (fromRow < toRow) {
             tmp = 1;
           } else if (fromRow > toRow) {
             tmp = -1;
           }
-        } else if (fromRow == toRow && fromCol != toCol) {
+        } else if (fromRow === toRow && fromCol !== toCol) {
           end = toCol;
-          cnst = 1;
+          constant = 1;
           if (fromCol < toCol) {
             tmp = 1;
           } else if (fromCol > toCol) {
@@ -402,15 +399,15 @@ class Chess extends GameEngine {
         }
 
         while (true) {
-          //increament and check condition
-          if (cnst == 0) {
+          //increment and check condition
+          if (constant === 0) {
             i += tmp;
-            if (tmp == 1 && i > end) break;
-            else if (tmp == -1 && i < end) break;
-          } else if (cnst == 1) {
+            if (tmp === 1 && i > end) break;
+            else if (tmp === -1 && i < end) break;
+          } else if (constant === 1) {
             j += tmp;
-            if (tmp == 1 && j > end) break;
-            else if (tmp == -1 && j < end) break;
+            if (tmp === 1 && j > end) break;
+            else if (tmp === -1 && j < end) break;
           }
           //check logic
           if (
@@ -434,28 +431,28 @@ class Chess extends GameEngine {
       }
 
       //for white pawn
-      if (board[fromRow][fromCol] == "p") {
+      if (board[fromRow][fromCol] === "p") {
         if (
-          toCol == fromCol &&
-          toRow == fromRow - 1 &&
-          board[toRow][toCol] == " "
+          toCol === fromCol &&
+          toRow === fromRow - 1 &&
+          board[toRow][toCol] === " "
         ) {
           board[toRow][toCol] = "p";
           board[fromRow][fromCol] = " ";
           return { BD: board, f: true };
         } else if (
-          fromRow == 6 &&
-          toCol == fromCol &&
-          toRow == fromRow - 2 &&
-          board[toRow][toCol] == " "
+          fromRow === 6 &&
+          toCol === fromCol &&
+          toRow === fromRow - 2 &&
+          board[toRow][toCol] === " "
         ) {
           board[toRow][toCol] = "p";
           board[fromRow][fromCol] = " ";
           return { BD: board, f: true };
         } else if (
-          toCol == fromCol + 1 &&
+          toCol === fromCol + 1 &&
           fromCol + 1 <= 7 &&
-          toRow == fromRow - 1 &&
+          toRow === fromRow - 1 &&
           "A" <= board[toRow][toCol] &&
           board[toRow][toCol] <= "Z"
         ) {
@@ -463,9 +460,9 @@ class Chess extends GameEngine {
           board[fromRow][fromCol] = " ";
           return { BD: board, f: true };
         } else if (
-          toCol == fromCol - 1 &&
+          toCol === fromCol - 1 &&
           0 <= fromCol - 1 &&
-          toRow == fromRow - 1 &&
+          toRow === fromRow - 1 &&
           "A" <= board[toRow][toCol] &&
           board[toRow][toCol] <= "Z"
         ) {
@@ -479,29 +476,29 @@ class Chess extends GameEngine {
       }
 
       //for black pawn
-      if (board[fromRow][fromCol] == "P") {
+      if (board[fromRow][fromCol] === "P") {
         // console.log(fromRow+666,` `,fromCol,` `,toRow,` `,toCol,` `);
         if (
-          toCol == fromCol &&
-          toRow == fromRow + 1 &&
-          board[toRow][toCol] == " "
+          toCol === fromCol &&
+          toRow === fromRow + 1 &&
+          board[toRow][toCol] === " "
         ) {
           board[toRow][toCol] = "P";
           board[fromRow][fromCol] = " ";
           return { BD: board, f: true };
         } else if (
-          fromRow == 1 &&
-          toCol == fromCol &&
-          toRow == 3 &&
-          board[toRow][toCol] == " "
+          fromRow === 1 &&
+          toCol === fromCol &&
+          toRow === 3 &&
+          board[toRow][toCol] === " "
         ) {
           board[toRow][toCol] = "P";
           board[fromRow][fromCol] = " ";
           return { BD: board, f: true };
         } else if (
-          toCol == fromCol + 1 &&
+          toCol === fromCol + 1 &&
           fromCol + 1 <= 7 &&
-          toRow == fromRow + 1 &&
+          toRow === fromRow + 1 &&
           "a" <= board[toRow][toCol] &&
           board[toRow][toCol] <= "z"
         ) {
@@ -509,9 +506,9 @@ class Chess extends GameEngine {
           board[fromRow][fromCol] = " ";
           return { BD: board, f: true };
         } else if (
-          toCol == fromCol - 1 &&
+          toCol === fromCol - 1 &&
           0 <= fromCol - 1 &&
-          toRow == fromRow + 1 &&
+          toRow === fromRow + 1 &&
           "a" <= board[toRow][toCol] &&
           board[toRow][toCol] <= "z"
         ) {

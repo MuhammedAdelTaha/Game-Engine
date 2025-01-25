@@ -13,8 +13,7 @@ class Connect4 extends GameEngine {
             display: flex;
             justify-content: center;
             align-items: center;
-            background-image: url('assets/backgrounds/checkers.jpg');
-            background-repeat: 1;
+            background-image: url('/assets/backgrounds/checkers.jpg');
             background-size: contain;
             height: 100%;
           }
@@ -36,7 +35,7 @@ class Connect4 extends GameEngine {
             margin : 3px;
             justify-content: center;
             align-items: center;
-            font-size: 0em;
+            font-size: 0;
             border: 1px solid #000;
             border-radius: 50%;
             background-color: white;
@@ -67,7 +66,7 @@ class Connect4 extends GameEngine {
 
   //input : c
   controller(board, input, playerTurn) {
-    if ([...input].length != 1) {
+    if ([...input].length !== 1) {
       return { BD: board, f: false };
     }
     let col = parseInt(input[0]);

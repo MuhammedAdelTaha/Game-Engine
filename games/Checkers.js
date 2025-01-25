@@ -13,8 +13,7 @@ class Checkers extends GameEngine {
             justify-content: center;
             align-items: center;
             height: 100%;
-            background-image: url('assets/backgrounds/checkers.jpg');
-            background-repeat: 1;
+            background-image: url('/assets/backgrounds/checkers.jpg');
             background-size: contain;
           }
           .board {
@@ -22,13 +21,11 @@ class Checkers extends GameEngine {
             margin-left: 10px;
             grid-template-columns: repeat(8, 70px);
             grid-template-rows: repeat(8, 70px);
-            background-color: #d1a05f;
             width: calc(70px * 8);
             height: calc(70px * 8);
             border: 2px solid #000;
             border-collapse: collapse;
             box-shadow: 0 0 30px #626b74; /* Add a subtle box shadow */
-            background-color: #fff; /* Add a white background color */
           }
           #pos{
             position: relative;
@@ -41,7 +38,7 @@ class Checkers extends GameEngine {
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 0em;
+            font-size: 0;
             font-weight: bold;
             border: 1px solid #000;
             background-color: white;
@@ -89,7 +86,7 @@ class Checkers extends GameEngine {
 
   //input: rc,rc
   controller(board, input, playerTurn) {
-    if ([...input].length != 5) {
+    if ([...input].length !== 5) {
       return { BD: board, f: false };
     }
     let fromRow = parseInt(input[0]);
@@ -113,28 +110,28 @@ class Checkers extends GameEngine {
       //alert('Wrong Input');
       return { BD: board, f: false };
     } else if (
-      board[fromRow][fromCol] != "b" &&
-      board[fromRow][fromCol] != "w"
+      board[fromRow][fromCol] !== "b" &&
+      board[fromRow][fromCol] !== "w"
     ) {
       return { BD: board, f: false };
     } else if (
-      (playerTurn && board[fromRow][fromCol] == "b") ||
-      (!playerTurn && board[fromRow][fromCol] == "w")
+      (playerTurn && board[fromRow][fromCol] === "b") ||
+      (!playerTurn && board[fromRow][fromCol] === "w")
     ) {
-      if (board[fromRow][fromCol] == "b") {
+      if (board[fromRow][fromCol] === "b") {
         if (
-          fromRow + 1 == toRow &&
-          (fromCol + 1 == toCol || fromCol - 1 == toCol) &&
-          board[toRow][toCol] == " "
+          fromRow + 1 === toRow &&
+          (fromCol + 1 === toCol || fromCol - 1 === toCol) &&
+          board[toRow][toCol] === " "
         ) {
           board[toRow][toCol] = board[fromRow][fromCol];
           board[fromRow][fromCol] = " ";
           return { BD: board, f: true };
         } else if (
-          fromRow + 2 == toRow &&
-          ((fromCol + 2 == toCol && board[fromRow + 1][fromCol + 1] == "w") ||
-            (fromCol - 2 == toCol && board[fromRow + 1][fromCol - 1] == "w")) &&
-          board[toRow][toCol] == " "
+          fromRow + 2 === toRow &&
+          ((fromCol + 2 === toCol && board[fromRow + 1][fromCol + 1] === "w") ||
+            (fromCol - 2 === toCol && board[fromRow + 1][fromCol - 1] === "w")) &&
+          board[toRow][toCol] === " "
         ) {
           if (toCol < fromCol) {
             board[fromRow + 1][fromCol - 1] = " ";
@@ -147,20 +144,20 @@ class Checkers extends GameEngine {
         } else {
           return { BD: board, f: false };
         }
-      } else if (board[fromRow][fromCol] == "w") {
+      } else if (board[fromRow][fromCol] === "w") {
         if (
-          fromRow - 1 == toRow &&
-          (fromCol + 1 == toCol || fromCol - 1 == toCol) &&
-          board[toRow][toCol] == " "
+          fromRow - 1 === toRow &&
+          (fromCol + 1 === toCol || fromCol - 1 === toCol) &&
+          board[toRow][toCol] === " "
         ) {
           board[toRow][toCol] = board[fromRow][fromCol];
           board[fromRow][fromCol] = " ";
           return { BD: board, f: true };
         } else if (
-          fromRow - 2 == toRow &&
-          ((fromCol + 2 == toCol && board[fromRow - 1][fromCol + 1] == "b") ||
-            (fromCol - 2 == toCol && board[fromRow - 1][fromCol - 1] == "b")) &&
-          board[toRow][toCol] == " "
+          fromRow - 2 === toRow &&
+          ((fromCol + 2 === toCol && board[fromRow - 1][fromCol + 1] === "b") ||
+            (fromCol - 2 === toCol && board[fromRow - 1][fromCol - 1] === "b")) &&
+          board[toRow][toCol] === " "
         ) {
           if (toCol < fromCol) {
             board[fromRow - 1][fromCol - 1] = " ";

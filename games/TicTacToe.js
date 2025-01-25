@@ -15,8 +15,7 @@ class TicTacToe extends GameEngine {
             justify-content: center;
             align-items: center;
             height: 100%;
-            background-image: url('assets/backgrounds/xo.jpg');
-            background-repeat: 1;
+            background-image: url('/assets/backgrounds/xo.jpg');
             background-size: contain;
           }
   
@@ -78,7 +77,7 @@ class TicTacToe extends GameEngine {
 
   //input: rc
   controller(board, input, playerTurn) {
-    if ([...input].length != 2) {
+    if ([...input].length !== 2) {
       return { BD: board, f: false };
     }
     let row = parseInt(input[0]);

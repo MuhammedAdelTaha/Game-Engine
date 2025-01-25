@@ -12,11 +12,11 @@ class GameEngine {
   async gameLoop(board) {
     let playerTurn = true;
     this.drawer(board);
-    await new Promise((resolve) => setTimeout(resolve, 1500));
+    await new Promise((resolve) => setTimeout(resolve, 1000));
 
     while (true) {
       let input = prompt("Enter the input of the game (E for Exit)");
-      if (input == "E") break;
+      if (input.toLowerCase() === "e") break;
 
       let result = this.controller(board, input, playerTurn);
       if (result.f) {
@@ -49,7 +49,7 @@ function play(check) {
     }
     case 2: {
       board = Array(6)
-        .fill()
+        .fill(undefined, undefined, undefined)
         .map(() => Array(7).fill(" "));
       game = new Connect4();
       break;
@@ -116,6 +116,6 @@ function play(check) {
    * Start the game
    */
   if (board != null) {
-    game.gameLoop(board);
+    game.gameLoop(board).then(() => window.location.reload());
   }
 }
