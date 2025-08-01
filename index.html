@@ -1,98 +1,164 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Game Engine</title>
-    <link
-      rel="icon"
-      type="image/x-icon"
-      href="assets/icons/computer-game.png"
-    />
-    <link rel="stylesheet" href="style.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Finger+Paint&display=swap"
-      rel="stylesheet"
-    />
-  </head>
-  <body>
-    <script src="GameEngine.js"></script>
-    <script src="games/TicTacToe.js"></script>
-    <script src="games/Connect4.js"></script>
-    <script src="games/Checkers.js"></script>
-    <script src="games/Chess.js"></script>
-    <script src="games/Sudoku.js"></script>
-    <script src="games/EightQueens.js"></script>
+<head>
+  <meta charset="UTF-8" />
+  <title>Game Engine</title>
+  <link
+          rel="icon"
+          type="image/x-icon"
+          href="assets/icons/computer-game.png"
+  />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+          href="https://fonts.googleapis.com/css2?family=Finger+Paint&display=swap"
+          rel="stylesheet"
+  />
+</head>
+<body>
+<script src="GameEngine.js"></script>
+<script src="games/TicTacToe.js"></script>
+<script src="games/Connect4.js"></script>
+<script src="games/Sudoku.js"></script>
+<script src="games/EightQueens.js"></script>
+<script src="games/LightsOut.js"></script>
 
-    <h1>Game Engine</h1>
-    <div class="game-container">
+<!-- Animated Background -->
+<div class="background-animation">
+  <div class="floating-symbol">♔</div>
+  <div class="floating-symbol">♛</div>
+  <div class="floating-symbol">♜</div>
+  <div class="floating-symbol">♝</div>
+  <div class="floating-symbol">♞</div>
+  <div class="floating-symbol">♟</div>
+  <div class="floating-symbol">⭕</div>
+  <div class="floating-symbol">✖</div>
+  <div class="floating-symbol">🔴</div>
+  <div class="floating-symbol">🟡</div>
+  <div class="floating-symbol">👑</div>
+  <div class="floating-symbol">🧩</div>
+  <div class="floating-symbol">💡</div>
+  <div class="floating-symbol">🔦</div>
+</div>
 
-      <div class="game tic-tac-toe" onclick="play(1)">
-        <h2>Tic-Tac-Toe</h2>
-        <span class="d-none d-lg-block">
-          <img class="resizable-image" src="assets/tic-tac-toe.png" alt="..."/>
-        </span>
-        <p>
-          Classic two-player game where the goal is to get three in a row,
-          column or diagonal.
-        </p>
+<div class="main-container">
+  <header class="game-header">
+    <h1 class="main-title">
+      <span class="title-word">🎮</span>
+      <span class="title-word">Game</span>
+      <span class="title-word">Engine</span>
+      <span class="title-word">🎯</span>
+    </h1>
+    <p class="subtitle">Choose your adventure and test your skills!</p>
+  </header>
+
+  <div class="game-container">
+    <div class="game tic-tac-toe" onclick="play(1)">
+      <div class="game-icon">✖⭕</div>
+      <h2>Tic-Tac-Toe</h2>
+      <div class="game-preview">
+        <div class="mini-board">
+          <div class="mini-cell">✖</div>
+          <div class="mini-cell">⭕</div>
+          <div class="mini-cell">✖</div>
+          <div class="mini-cell">⭕</div>
+          <div class="mini-cell">✖</div>
+          <div class="mini-cell">⭕</div>
+          <div class="mini-cell"></div>
+          <div class="mini-cell"></div>
+          <div class="mini-cell"></div>
+        </div>
       </div>
-
-      <div class="game connect-4" onclick="play(2)">
-        <h2>Connect 4</h2>
-        <span class="d-none d-lg-block">
-          <img class="resizable-image" src="assets/connect4.png" alt="..."/>
-        </span>
-        <p>
-          Two-player game where the goal is to get four of your pieces in a row,
-          column or diagonal.
-        </p>
-      </div>
-
-      <div class="game checkers" onclick="play(3)">
-        <h2>Checkers</h2>
-        <span class="d-none d-lg-block">
-          <img class="resizable-image" src="assets/checkers.png" alt="..."/>
-        </span>
-        <p>
-          Two-player game where the goal is to capture all of your opponent's
-          pieces.
-        </p>
-      </div>
-
-      <div class="game chess" onclick="play(4)">
-        <h2>Chess</h2>
-        <span class="d-none d-lg-block">
-          <img class="resizable-image" src="assets/chess.png" alt="..."/>
-        </span>
-        <p>
-          Two-player strategy game where the goal is to checkmate your
-          opponent's king.
-        </p>
-      </div>
-
-      <div class="game sudoku" onclick="play(5)">
-        <h2>Sudoku</h2>
-        <span class="d-none d-lg-block">
-          <img class="resizable-image" src="assets/sudoku.png" alt="..."/>
-        </span>
-        <p>
-          Single-player game where the goal is to fill a 9x9 grid with numbers
-          1–9 without repeating in any row, column, or 3x3 box.
-        </p>
-      </div>
-
-      <div class="game eight-queens" onclick="play(6)">
-        <h2>Eight Queens</h2>
-        <span class="d-none d-lg-block">
-          <img class="resizable-image" src="assets/crown.png" alt="..."/>
-        </span>
-        <p>
-          Single-player puzzle game where the goal is to place eight queens on a
-          chessboard such that no two queens attack each other.
-        </p>
+      <p>Classic two-player game where the goal is to get three in a row, column or diagonal.</p>
+      <div class="play-button">
+        <span>Play Now!</span>
+        <div class="button-glow"></div>
       </div>
     </div>
-  </body>
+
+    <div class="game connect-4" onclick="play(2)">
+      <div class="game-icon">🔴🟡</div>
+      <h2>Connect 4</h2>
+      <div class="game-preview">
+        <div class="connect4-preview">
+          <div class="connect4-piece red"></div>
+          <div class="connect4-piece yellow"></div>
+          <div class="connect4-piece red"></div>
+          <div class="connect4-piece yellow"></div>
+        </div>
+      </div>
+      <p>Two-player game where the goal is to get four of your pieces in a row, column or diagonal.</p>
+      <div class="play-button">
+        <span>Play Now!</span>
+        <div class="button-glow"></div>
+      </div>
+    </div>
+
+    <div class="game sudoku" onclick="play(3)">
+      <div class="game-icon">🔢🧩</div>
+      <h2>Sudoku</h2>
+      <div class="game-preview">
+        <div class="sudoku-preview">
+          <div class="sudoku-number">1</div>
+          <div class="sudoku-number">2</div>
+          <div class="sudoku-number">3</div>
+          <div class="sudoku-number">4</div>
+          <div class="sudoku-number">5</div>
+          <div class="sudoku-number">6</div>
+          <div class="sudoku-number">7</div>
+          <div class="sudoku-number">8</div>
+          <div class="sudoku-number">9</div>
+        </div>
+      </div>
+      <p>Single-player game where the goal is to fill a 9x9 grid with numbers 1–9 without repeating.</p>
+      <div class="play-button">
+        <span>Play Now!</span>
+        <div class="button-glow"></div>
+      </div>
+    </div>
+
+    <div class="game eight-queens" onclick="play(4)">
+      <div class="game-icon">👑✨</div>
+      <h2>Eight Queens</h2>
+      <div class="game-preview">
+        <div class="queens-preview">
+          <div class="queen-piece">♛</div>
+          <div class="queen-piece">♛</div>
+          <div class="queen-piece">♛</div>
+          <div class="queen-sparkle">✨</div>
+        </div>
+      </div>
+      <p>Single-player puzzle where the goal is to place eight queens on a chessboard without attacks.</p>
+      <div class="play-button">
+        <span>Play Now!</span>
+        <div class="button-glow"></div>
+      </div>
+    </div>
+
+    <div class="game lights-out" onclick="play(5)">
+      <div class="game-icon">💡🔦</div>
+      <h2>Lights Out</h2>
+      <div class="game-preview">
+        <div class="lights-preview">
+          <div class="light-bulb on">💡</div>
+          <div class="light-bulb off">⚫</div>
+          <div class="light-bulb on">💡</div>
+          <div class="light-bulb off">⚫</div>
+          <div class="light-bulb on">💡</div>
+        </div>
+      </div>
+      <p>Single-player puzzle where clicking a light toggles it and adjacent lights. Turn all lights OFF!</p>
+      <div class="play-button">
+        <span>Play Now!</span>
+        <div class="button-glow"></div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="game-footer">
+    <p>✨ Built with passion for classic games ✨</p>
+  </footer>
+</div>
+</body>
 </html>
