@@ -1,4 +1,82 @@
 class Sudoku extends GameEngine {
+  inputHandler(playerTurn) {
+    return new Promise((resolve) => {
+      // Add input interface to the existing document
+      const inputContainer = document.createElement('div');
+      inputContainer.className = 'input-container';
+      inputContainer.innerHTML = `
+        <div class="player-turn">
+          🧠 Your Turn—Place a Number
+        </div>
+        <h3>Enter Your Move</h3>
+        <div class="input-row">
+          <input type="text" class="move-input row-input" id="rowInput" placeholder="R" maxlength="1" autocomplete="off">
+          <input type="text" class="move-input col-input" id="colInput" placeholder="C" maxlength="1" autocomplete="off">
+          <input type="text" class="move-input num-input" id="numInput" placeholder="N" maxlength="1" autocomplete="off">
+        </div>
+        <div class="button-row">
+          <button class="game-button play-btn" id="playBtn">Place Number</button>
+          <button class="game-button exit-btn" id="exitBtn">Exit Game</button>
+        </div>
+        <div class="input-instructions">
+          Enter Row (0–8), Column (0–8), Number (1–9) • Example: Row 0, Col 1, Number 5
+        </div>
+      `;
+
+      document.body.appendChild(inputContainer);
+
+      const rowInput = document.getElementById('rowInput');
+      const colInput = document.getElementById('colInput');
+      const numInput = document.getElementById('numInput');
+      const playBtn = document.getElementById('playBtn');
+      const exitBtn = document.getElementById('exitBtn');
+
+      // Focus on first input
+      rowInput.focus();
+
+      // Auto-advance to next input
+      rowInput.addEventListener('input', (e) => {
+        e.target.value = e.target.value.replace(/[^0-8]/g, '');
+        if (e.target.value.length === 1) colInput.focus();
+      });
+
+      colInput.addEventListener('input', (e) => {
+        e.target.value = e.target.value.replace(/[^0-8]/g, '');
+        if (e.target.value.length === 1) numInput.focus();
+      });
+
+      numInput.addEventListener('input', (e) => {
+        e.target.value = e.target.value.replace(/[^1-9]/g, '');
+      });
+
+      // Handle play button click
+      playBtn.addEventListener('click', () => {
+        const input = rowInput.value + colInput.value + numInput.value;
+        document.body.removeChild(inputContainer);
+        resolve(input);
+      });
+
+      // Handle exit button click
+      exitBtn.addEventListener('click', () => {
+        document.body.removeChild(inputContainer);
+        resolve('e');
+      });
+
+      // Handle Enter key press
+      const handleEnter = (e) => {
+        if (e.key === 'Enter') {
+          const input = rowInput.value + colInput.value + numInput.value;
+          document.body.removeChild(inputContainer);
+          resolve(input);
+        }
+      };
+
+      rowInput.addEventListener('keypress', handleEnter);
+      colInput.addEventListener('keypress', handleEnter);
+      numInput.addEventListener('keypress', handleEnter);
+    });
+  }
+
   drawer(board) {
     document.open();
     document.write(`
@@ -306,6 +384,143 @@ class Sudoku extends GameEngine {
             from { opacity: 0.7; }
             to { opacity: 1; }
           }
+          
+          .input-container {
+            position: fixed;
+            right: 50px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: linear-gradient(145deg, #60A3D9, #0074B7);
+            border-radius: 20px;
+            padding: 25px 30px;
+            box-shadow: 
+              0 15px 35px rgba(0,0,0,0.3),
+              inset 0 2px 4px rgba(255,255,255,0.2);
+            border: 1px solid rgba(191,215,237,0.3);
+            backdrop-filter: blur(15px);
+            width: 320px;
+            text-align: center;
+            animation: slideInRight 0.5s ease-out;
+          }
+          
+          @keyframes slideInRight {
+            from {
+              opacity: 0;
+              transform: translateY(-50%) translateX(100px);
+            }
+            to {
+              opacity: 1;
+              transform: translateY(-50%) translateX(0);
+            }
+          }
+          
+          .input-container h3 {
+            color: #BFD7ED;
+            margin: 0 0 20px 0;
+            font-size: 1.4rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+          }
+          
+          .input-row {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+          }
+          
+          .move-input {
+            width: 60px;
+            height: 45px;
+            border: none;
+            border-radius: 10px;
+            background: rgba(255,255,255,0.9);
+            color: #003B73;
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-align: center;
+            font-family: 'Finger Paint', cursive;
+            box-shadow: 
+              inset 2px 2px 4px rgba(0,0,0,0.1),
+              0 2px 8px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+          }
+          
+          .move-input:focus {
+            outline: none;
+            box-shadow: 
+              inset 2px 2px 4px rgba(0,0,0,0.1),
+              0 0 0 3px rgba(96,163,217,0.5),
+              0 2px 8px rgba(0,0,0,0.1);
+            transform: scale(1.05);
+          }
+          
+          .row-input { border-bottom: 3px solid #dc3545; }
+          .col-input { border-bottom: 3px solid #ffc107; }
+          .num-input { border-bottom: 3px solid #28a745; }
+          
+          .button-row {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 15px;
+          }
+          
+          .game-button {
+            height: 45px;
+            padding: 0 20px;
+            border: none;
+            border-radius: 10px;
+            font-family: 'Finger Paint', cursive;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+          }
+          
+          .play-btn {
+            background: linear-gradient(145deg, #28a745, #20c997);
+            color: white;
+            box-shadow: 0 4px 15px rgba(40,167,69,0.3);
+          }
+          
+          .play-btn:hover {
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 6px 20px rgba(40,167,69,0.4);
+          }
+          
+          .exit-btn {
+            background: linear-gradient(145deg, #dc3545, #c82333);
+            color: white;
+            box-shadow: 0 4px 15px rgba(220,53,69,0.3);
+          }
+          
+          .exit-btn:hover {
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 6px 20px rgba(220,53,69,0.4);
+          }
+          
+          .player-turn {
+            color: #BFD7ED;
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+            animation: playerTurnPulse 2s ease-in-out infinite;
+          }
+          
+          @keyframes playerTurnPulse {
+            0%, 100% { opacity: 0.8; }
+            50% { opacity: 1; transform: scale(1.05); }
+          }
+          
+          .input-instructions {
+            color: rgba(191,215,237,0.8);
+            font-size: 0.85rem;
+            margin-top: 10px;
+            line-height: 1.3;
+          }
         </style>
       `);
 
@@ -337,7 +552,7 @@ class Sudoku extends GameEngine {
     }
 
     document.write('</div></div>');
-    document.write('<div class="game-info">Fill empty cells with numbers 1–9 • No repeats in rows, columns, or boxes • Input Format: rc,n • E to exit</div>');
+    document.write('<div class="game-info">Fill empty cells with numbers 1–9 • No repeats in rows, columns, or boxes</div>');
     document.close();
   }
 
@@ -374,12 +589,13 @@ class Sudoku extends GameEngine {
 
   //input: rc,n
   controller(board, input, playerTurn) {
-    if ([...input].length !== 4) {
+    console.log(input);
+    if ([...input].length !== 3) {
       return { BD: board, f: false };
     }
     let row = parseInt(input[0]);
     let col = parseInt(input[1]);
-    let num = parseInt(input[3]);
+    let num = parseInt(input[2]);
     if (
       isNaN(row) ||
       isNaN(col) ||

@@ -1,4 +1,62 @@
 class EightQueens extends GameEngine {
+  inputHandler(playerTurn) {
+    return new Promise((resolve) => {
+      // Add input interface to the existing document
+      const inputContainer = document.createElement('div');
+      inputContainer.className = 'input-container';
+      inputContainer.innerHTML = `
+        <div class="player-turn">
+          👑 Your Majesty—Place a Queen
+        </div>
+        <h3>Choose Queen Position</h3>
+        <div class="input-row">
+          <input type="text" class="move-input" id="moveInput" placeholder="rc" maxlength="2" autocomplete="off">
+          <button class="game-button play-btn" id="playBtn">Place Queen</button>
+          <button class="game-button exit-btn" id="exitBtn">Exit Game</button>
+        </div>
+        <div class="input-instructions">
+          Enter row and column (0–7) • Example: 03 for row 0, column 3
+        </div>
+      `;
+
+      document.body.appendChild(inputContainer);
+
+      const moveInput = document.getElementById('moveInput');
+      const playBtn = document.getElementById('playBtn');
+      const exitBtn = document.getElementById('exitBtn');
+
+      // Focus on input
+      moveInput.focus();
+
+      // Handle play button click
+      playBtn.addEventListener('click', () => {
+        const input = moveInput.value.trim();
+        document.body.removeChild(inputContainer);
+        resolve(input);
+      });
+
+      // Handle exit button click
+      exitBtn.addEventListener('click', () => {
+        document.body.removeChild(inputContainer);
+        resolve('e');
+      });
+
+      // Handle Enter key press
+      moveInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+          const input = moveInput.value.trim();
+          document.body.removeChild(inputContainer);
+          resolve(input);
+        }
+      });
+
+      // Auto-format input (only allow numbers 0-7)
+      moveInput.addEventListener('input', (e) => {
+        e.target.value = e.target.value.replace(/[^0-7]/g, '');
+      });
+    });
+  }
+
   drawer(board) {
     document.open();
     document.write(`
@@ -274,6 +332,272 @@ class EightQueens extends GameEngine {
               transform: scale(1.05);
             }
           }
+          
+          .input-container {
+            position: fixed;
+            right: 50px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: linear-gradient(145deg, #60A3D9, #0074B7);
+            border-radius: 20px;
+            padding: 25px 30px;
+            box-shadow: 
+              0 15px 35px rgba(0,0,0,0.3),
+              inset 0 2px 4px rgba(255,255,255,0.2);
+            border: 1px solid rgba(191,215,237,0.3);
+            backdrop-filter: blur(15px);
+            width: 320px;
+            text-align: center;
+            animation: slideInRight 0.5s ease-out;
+          }
+          
+          @keyframes slideInRight {
+            from {
+              opacity: 0;
+              transform: translateY(-50%) translateX(100px);
+            }
+            to {
+              opacity: 1;
+              transform: translateY(-50%) translateX(0);
+            }
+          }
+          
+          .input-container::before {
+            content: '✨';
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            font-size: 1.5rem;
+            animation: royalSparkle 2s ease-in-out infinite;
+          }
+          
+          .input-container::after {
+            content: '👑';
+            position: absolute;
+            top: -15px;
+            left: -15px;
+            font-size: 1.8rem;
+            animation: crownFloat 3s ease-in-out infinite;
+          }
+          
+          @keyframes royalSparkle {
+            0%, 100% { 
+              opacity: 0.7;
+              transform: scale(1) rotate(0deg);
+            }
+            50% { 
+              opacity: 1;
+              transform: scale(1.3) rotate(180deg);
+            }
+          }
+          
+          @keyframes crownFloat {
+            0%, 100% { 
+              transform: translateY(0px) rotate(0deg);
+            }
+            50% { 
+              transform: translateY(-5px) rotate(5deg);
+            }
+          }
+          
+          .input-container h3 {
+            color: #BFD7ED;
+            margin: 0 0 15px 0;
+            font-size: 1.4rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            position: relative;
+          }
+          
+          @keyframes queensDance {
+            0%, 100% { opacity: 0.7; }
+            50% { opacity: 1; transform: translateX(-50%) scale(1.1); }
+          }
+          
+          .input-row {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+          }
+          
+          .move-input {
+            width: 100px;
+            height: 45px;
+            border-radius: 10px;
+            background: linear-gradient(145deg, rgba(255,255,255,0.95), rgba(255,215,0,0.1));
+            color: #003B73;
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-align: center;
+            font-family: 'Finger Paint', cursive;
+            box-shadow: 
+              inset 2px 2px 4px rgba(0,0,0,0.1),
+              0 2px 8px rgba(0,0,0,0.1),
+              0 0 15px rgba(255,215,0,0.2);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            position: relative;
+          }
+          
+          .move-input:focus {
+            outline: none;
+            box-shadow: 
+              inset 2px 2px 4px rgba(0,0,0,0.1),
+              0 0 0 3px rgba(255,215,0,0.5),
+              0 2px 8px rgba(0,0,0,0.1),
+              0 0 25px rgba(255,215,0,0.4);
+            transform: scale(1.05);
+            border-color: rgba(255,215,0,0.6);
+            background: linear-gradient(145deg, rgba(255,255,255,1), rgba(255,215,0,0.15));
+          }
+          
+          .move-input::before {
+            content: '♛';
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            font-size: 0.8rem;
+            color: rgba(255,215,0,0.6);
+            animation: inputQueen 2s ease-in-out infinite;
+          }
+          
+          @keyframes inputQueen {
+            0%, 100% { 
+              opacity: 0.6;
+              transform: scale(1) rotate(0deg);
+            }
+            50% { 
+              opacity: 1;
+              transform: scale(1.2) rotate(10deg);
+            }
+          }
+          
+          .game-button {
+            height: 45px;
+            padding: 0 20px;
+            border: none;
+            border-radius: 10px;
+            font-family: 'Finger Paint', cursive;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+          }
+          
+          .play-btn {
+            background: linear-gradient(145deg, #FFD700, #FFA500);
+            color: #003B73;
+            box-shadow: 0 4px 15px rgba(255,215,0,0.4);
+            text-shadow: 1px 1px 2px rgba(255,255,255,0.8);
+            border: 2px solid rgba(255,165,0,0.3);
+          }
+          
+          .play-btn:hover {
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 6px 20px rgba(255,215,0,0.6);
+            background: linear-gradient(145deg, #FFA500, #FFD700);
+            border-color: rgba(255,165,0,0.6);
+          }
+          
+          .play-btn::before {
+            content: '👑';
+            position: absolute;
+            left: 5px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 0.9rem;
+            animation: buttonCrown 2s ease-in-out infinite;
+          }
+          
+          @keyframes buttonCrown {
+            0%, 100% { opacity: 0.8; }
+            50% { opacity: 1; transform: translateY(-50%) scale(1.2); }
+          }
+          
+          .exit-btn {
+            background: linear-gradient(145deg, #dc3545, #c82333);
+            color: white;
+            box-shadow: 0 4px 15px rgba(220,53,69,0.3);
+          }
+          
+          .exit-btn:hover {
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 6px 20px rgba(220,53,69,0.4);
+          }
+          
+          .player-turn {
+            color: #BFD7ED;
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+            animation: playerTurnPulse 2s ease-in-out infinite;
+            position: relative;
+          }
+          
+          .player-turn::before {
+            content: '✨';
+            position: absolute;
+            left: -25px;
+            top: 50%;
+            transform: translateY(-50%);
+            animation: leftSparkle 2s ease-in-out infinite;
+          }
+          
+          .player-turn::after {
+            content: '✨';
+            position: absolute;
+            right: -25px;
+            top: 50%;
+            transform: translateY(-50%);
+            animation: rightSparkle 2s ease-in-out infinite 1s;
+          }
+          
+          @keyframes leftSparkle {
+            0%, 100% { opacity: 0.5; transform: translateY(-50%) rotate(0deg); }
+            50% { opacity: 1; transform: translateY(-50%) rotate(180deg); }
+          }
+          
+          @keyframes rightSparkle {
+            0%, 100% { opacity: 0.5; transform: translateY(-50%) rotate(0deg); }
+            50% { opacity: 1; transform: translateY(-50%) rotate(-180deg); }
+          }
+          
+          @keyframes playerTurnPulse {
+            0%, 100% { 
+              opacity: 0.8; 
+              text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+            }
+            50% { 
+              opacity: 1; 
+              transform: scale(1.05);
+              text-shadow: 1px 1px 2px rgba(0,0,0,0.3), 0 0 15px rgba(255,215,0,0.6);
+            }
+          }
+          
+          .input-instructions {
+            color: rgba(191,215,237,0.8);
+            font-size: 0.9rem;
+            margin-top: 10px;
+            line-height: 1.3;
+            background: linear-gradient(145deg, rgba(255,215,0,0.1), rgba(255,165,0,0.05));
+            padding: 10px 15px;
+            border-radius: 10px;
+            border-left: 3px solid rgba(255,215,0,0.5);
+            border-top: 1px solid rgba(255,215,0,0.2);
+            position: relative;
+          }
+          
+          .input-instructions::before {
+            content: '♛';
+            position: absolute;
+            top: -8px;
+            left: 10px;
+            font-size: 1rem;
+            color: rgba(255,215,0,0.7);
+          }
         </style>
       `);
 
@@ -310,7 +634,7 @@ class EightQueens extends GameEngine {
     }
 
     document.write('</div></div>');
-    document.write('<div class="game-info">Place eight queens so none can attack each other • Enter coordinates to place • Input Format: rc • E to exit</div>');
+    document.write('<div class="game-info">Place eight queens so none can attack each other</div>');
     document.close();
   }
 
